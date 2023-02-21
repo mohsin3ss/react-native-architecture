@@ -28,6 +28,8 @@
     // ? Babel Plugin Module Resolver
     "baseUrl": "./src",
     "paths": {
+      "@app/auth":["./modules/auth/index.ts"],
+      "@app/user":["./modules/user/index.ts"],
       "@shared-components/*": ["./shared/components/*"],
       "@shared-constants": ["./shared/constants"],
       "@font-size": ["./shared/theme/font-size"],
