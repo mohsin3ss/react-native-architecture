@@ -1,5 +1,5 @@
-import React, { useMemo } from "react";
-import { View, FlatList, Image } from "react-native";
+import React, { useContext, useMemo } from "react";
+import { View, FlatList, Image, Button } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import Icon from "react-native-dynamic-vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -17,6 +17,7 @@ import CardItem from "./components/card-item/CardItem";
 import { SCREENS } from "@shared-constants";
 import Text from "@shared-components/text-wrapper/TextWrapper";
 import fonts from "@fonts";
+import { AuthContext } from "context";
 
 const profileURI =
   // eslint-disable-next-line max-len
@@ -25,6 +26,7 @@ const profileURI =
 interface HomeScreenProps {}
 
 const HomeScreen: React.FC<HomeScreenProps> = () => {
+  const { signOut } = useContext(AuthContext);
   const theme = useTheme();
   const { colors } = theme;
   const styles = useMemo(() => createStyles(theme), [theme]);
@@ -50,6 +52,12 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
         resizeMode="cover"
         source={{ uri: profileURI }}
         style={styles.profilePicImageStyle}
+      />
+      <Button
+        title="LogOut"
+        onPress={() => {
+          signOut();
+        }}
       />
     </View>
   );
