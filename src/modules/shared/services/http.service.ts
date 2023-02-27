@@ -1,7 +1,8 @@
 import axios, { AxiosRequestConfig } from "axios";
 
 export class HttpService {
-  baseUrl = "http://localhost:3000/api/";
+  // baseUrl = "http://localhost:3000/api/";
+  baseUrl = "http://192.168.0.185:3000/api/";
 
   get(endpoint: string, headers = {}) {
     return new Promise((resolve, reject) => {

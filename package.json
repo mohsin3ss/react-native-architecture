@@ -14,6 +14,8 @@
     "axios": "^0.27.2",
     "axios-hooks": "^3.1.4",
     "events": "^3.3.0",
+    "formik": "^2.2.9",
+    "lodash": "^4.17.21",
     "react": "18.2.0",
     "react-native": "0.69.4",
     "react-native-dynamic-vector-icons": "^1.2.0",
@@ -24,7 +26,8 @@
     "react-native-screens": "^3.15.0",
     "react-native-splash-screen": "^3.3.0",
     "react-native-vector-icons": "^9.2.0",
-    "react-navigation-helpers": "^2.1.0"
+    "react-navigation-helpers": "^2.1.0",
+    "yup": "^1.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.18.10",
@@ -33,6 +36,7 @@
     "@commitlint/config-conventional": "^17.0.3",
     "@react-native-community/eslint-config": "^3.1.0",
     "@types/react-native": "^0.69.5",
+    "@types/react-native-vector-icons": "^6.4.13",
     "@typescript-eslint/eslint-plugin": "^5.33.0",
     "@typescript-eslint/parser": "^5.33.0",
     "babel-plugin-module-resolver": "^4.1.0",
