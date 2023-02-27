@@ -6,31 +6,31 @@ import { useTheme } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { Formik } from "formik";
 import * as yup from "yup";
-// import { HttpService } from "modules/shared/services";
+import { HttpService } from "modules/shared/services";
+
 const ResetPasswordComponent = ({ navigation }) => {
   const theme = useTheme();
   const { colors } = theme;
   const styles = useMemo(() => createStyles(theme), [theme]);
 
-  // const httpService = useMemo(() => new HttpService(), []);
+  const httpService = useMemo(() => new HttpService(), []);
 
-  // const forgotPassword = (values, formikActions) => {
-  //   httpService
-  //     .post("auth/forgot-password", values, {
-  //       "Content-Type": "application/json",
-  //     })
-  //     .then((res: any) => {
-  //       console.log("res", res);
-  //       setConfirmation(
-  //         "Password reset instructions have been sent to your email.!",
-  //       );
-  //       formikActions.resetForm();
-  //     })
-  //     .catch((err) => {
-  //       console.log("err", err);
-  //       setConfirmation("Error submitting form. Please try again.");
-  //     });
-  // };
+  const resetPassword = async (data, formikActions) => {
+    const token = "647a4950650a45d650802aa1b840be51bb7d1f7f";
+    data = { ...data, token };
+    console.log(data);
+    await httpService
+      .post("auth/reset-password", data, { "Content-Type": "application/json" })
+      .then((res) => {
+        console.log("res", res);
+        navigation.push("SignIn");
+        formikActions.resetForm();
+      })
+      .catch((err) => {
+        console.log("err", err);
+        alert("Error");
+      });
+  };
 
   return (
     <View style={styles.container}>
@@ -48,20 +48,22 @@ const ResetPasswordComponent = ({ navigation }) => {
       </View>
       <Formik
         initialValues={{
-          newpassword: "",
-          confirmpassword: "",
+          password: "",
+          confirmPassword: "",
         }}
         // On Submit Funtion below
 
-        onSubmit={(values) => console.log(JSON.stringify(values))}
+        onSubmit={(values, formikActions) =>
+          resetPassword(values, formikActions)
+        }
         //Validation code below
         validationSchema={yup.object().shape({
-          newpassword: yup
+          password: yup
             .string()
             .min(4)
             .max(10, "Password should not excced 10 chars.")
             .required(),
-          confirmpassword: yup
+          confirmPassword: yup
             .string()
             .min(4)
             .max(10, "Password should not excced 10 chars.")
@@ -82,15 +84,15 @@ const ResetPasswordComponent = ({ navigation }) => {
               <View style={styles.form}>
                 <TextInput
                   placeholder="New Password"
-                  value={values.newpassword}
-                  onChangeText={handleChange("newpassword")}
-                  onBlur={() => setFieldTouched("newpassword")}
+                  value={values.password}
+                  onChangeText={handleChange("password")}
+                  onBlur={() => setFieldTouched("password")}
                   style={{ width: "80%" }}
                 />
                 <Icon name="eye" size={18} />
               </View>
 
-              {touched.newpassword && errors.newpassword && (
+              {touched.password && errors.password && (
                 <Text
                   style={{
                     fontSize: 12,
@@ -98,7 +100,7 @@ const ResetPasswordComponent = ({ navigation }) => {
                     textAlign: "center",
                   }}
                 >
-                  {errors.newpassword}
+                  {errors.password}
                 </Text>
               )}
             </View>
@@ -108,15 +110,15 @@ const ResetPasswordComponent = ({ navigation }) => {
                 <TextInput
                   placeholder="Confirm Password*"
                   style={{ width: "80%" }}
-                  value={values.confirmpassword}
-                  onChangeText={handleChange("confirmpassword")}
-                  onBlur={() => setFieldTouched("confirmpassword")}
+                  value={values.confirmPassword}
+                  onChangeText={handleChange("confirmPassword")}
+                  onBlur={() => setFieldTouched("confirmPassword")}
                   secureTextEntry={true}
                 />
                 <Icon name="eye" size={18} />
               </View>
 
-              {touched.confirmpassword && errors.confirmpassword && (
+              {touched.confirmPassword && errors.confirmPassword && (
                 <Text
                   style={{
                     fontSize: 12,
@@ -124,7 +126,7 @@ const ResetPasswordComponent = ({ navigation }) => {
                     textAlign: "center",
                   }}
                 >
-                  {errors.confirmpassword}
+                  {errors.confirmPassword}
                 </Text>
               )}
             </View>

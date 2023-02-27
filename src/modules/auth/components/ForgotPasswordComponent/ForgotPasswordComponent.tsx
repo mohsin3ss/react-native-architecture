@@ -94,12 +94,17 @@ const ForgotPasswordComponent = ({ navigation }) => {
                 <Text style={styles.btntext}>Submit</Text>
               </TouchableOpacity>
             </View>
-            {/* 
+
             <View style={{ flexDirection: "row" }}>
-              <TouchableOpacity style={styles.btnstyle} onPress={() => { navigation.push("ResetPassword") }}>
+              <TouchableOpacity
+                style={styles.btnstyle}
+                onPress={() => {
+                  navigation.push("ResetPassword");
+                }}
+              >
                 <Text style={styles.btntext}>Reset</Text>
               </TouchableOpacity>
-            </View> */}
+            </View>
           </View>
         )}
       </Formik>
